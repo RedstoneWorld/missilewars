@@ -45,7 +45,7 @@ public class MissileConfiguration extends SchematicConfiguration {
     private boolean southFacing = true;
     private boolean westFacing = true;
 
-    private List<Missile> schematics = new ArrayList<>() {{
+    private List<SchematicObject> schematics = new ArrayList<>() {{
         add(new Missile("Tomahawk.schematic", "&aTomahawk", 3, EntityType.CREEPER, 2, 2));
         add(new Missile("Cruiser.schematic", "&eCruiser", 2, EntityType.BLAZE, 2, 2));
         add(new Missile("Sword.schematic", "&7Sword", 2, EntityType.SKELETON, 2, 2));
@@ -53,8 +53,8 @@ public class MissileConfiguration extends SchematicConfiguration {
         add(new Missile("Piranha.schematic", "&3Piranha", 3, EntityType.HORSE, 2, 2));
         add(new Missile("Tunnelbore.schematic", "&0Tunnelbore", 1, EntityType.ENDERMAN, 2, 2));
     }};
-
-
+    
+    
     @Override
     public String getObjectNameSingular() {
         return "Missile";
@@ -69,7 +69,7 @@ public class MissileConfiguration extends SchematicConfiguration {
     public List<String> getSchematicNames() {
         List<String> schematicNames = new ArrayList<>();
 
-        for (Missile missile : getSchematics()) {
+        for (SchematicObject missile : getSchematics()) {
             schematicNames.add(missile.getSchematicName(true));
         }
 
@@ -80,7 +80,7 @@ public class MissileConfiguration extends SchematicConfiguration {
     public SchematicObject getSchematicFromName(String name) {
         String filteredName = name.replaceAll("§.", "");
 
-        for (Missile missile : getSchematics()) {
+        for (SchematicObject missile : getSchematics()) {
             if (missile.getSchematicName(true).equalsIgnoreCase(filteredName)) return missile;
         }
         Logger.WARN.log("Schematic not found: " + filteredName);
@@ -93,9 +93,10 @@ public class MissileConfiguration extends SchematicConfiguration {
 
         Set<SchematicObject> toRemove = new HashSet<>();
         
-        for (Missile missile : getSchematics()) {
+        for (SchematicObject missile : getSchematics()) {
             File schematic = missile.getSchematic();
-
+            
+            Logger.NORMAL.log("Checking schematic type " + missile.getSchematicObjType().toString());
             if (schematic.exists()) continue;
 
             Logger.WARN.log(missile.getDisplayName() + " §7has no " + getObjectNameSingular() + ". Removing this schematic");

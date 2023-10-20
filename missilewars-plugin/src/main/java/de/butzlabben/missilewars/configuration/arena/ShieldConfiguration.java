@@ -40,7 +40,7 @@ public class ShieldConfiguration extends SchematicConfiguration {
 
     @SerializedName("fly_time") private int flyTime = 20;
 
-    private List<Shield> schematics = new ArrayList<>() {{
+    private List<SchematicObject> schematics = new ArrayList<>() {{
         add(new Shield("shield.schematic", "&cShield", 1));
     }};
 
@@ -59,7 +59,7 @@ public class ShieldConfiguration extends SchematicConfiguration {
     public List<String> getSchematicNames() {
         List<String> schematicNames = new ArrayList<>();
 
-        for (Shield shield : getSchematics()) {
+        for (SchematicObject shield : getSchematics()) {
             schematicNames.add(shield.getSchematicName(true));
         }
 
@@ -70,7 +70,7 @@ public class ShieldConfiguration extends SchematicConfiguration {
     public SchematicObject getSchematicFromName(String name) {
         String filteredName = name.replaceAll("§.", "");
 
-        for (Shield shield : getSchematics()) {
+        for (SchematicObject shield : getSchematics()) {
             if (shield.getSchematicName(true).equalsIgnoreCase(filteredName)) return shield;
         }
         Logger.WARN.log("Schematic not found: " + filteredName);
@@ -83,9 +83,10 @@ public class ShieldConfiguration extends SchematicConfiguration {
 
         Set<SchematicObject> toRemove = new HashSet<>();
 
-        for (Shield shield : getSchematics()) {
+        for (SchematicObject shield : getSchematics()) {
             File schematic = shield.getSchematic();
 
+            Logger.NORMAL.log("Checking schematic type " + shield.getSchematicObjType().toString());
             if (schematic.exists()) continue;
 
             Logger.WARN.log(shield.getDisplayName() + " §7has no " + getObjectNameSingular() + ". Removing this schematic");

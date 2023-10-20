@@ -117,5 +117,10 @@ public class Missile extends SchematicObject {
         String name = material.name();
         return name.contains("SPAWN_EGG") || name.equals("MONSTER_EGG");
     }
+
+    @Override
+    public SchematicObject.schematicType getSchematicObjType() {
+        return schematicType.MISSILE;
+    }
     
 }

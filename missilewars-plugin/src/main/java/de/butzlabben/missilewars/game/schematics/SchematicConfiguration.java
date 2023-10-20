@@ -6,6 +6,8 @@ import java.util.List;
 
 public abstract class SchematicConfiguration {
 
+    public abstract List<SchematicObject> getSchematics();
+
     public String getObjectNameSingular() {
         return "Schematic";
     }

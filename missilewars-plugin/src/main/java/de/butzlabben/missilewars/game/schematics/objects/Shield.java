@@ -50,5 +50,10 @@ public class Shield extends SchematicObject {
         snowball.setItemMeta(snowballMeta);
         return snowball;
     }
+
+    @Override
+    public SchematicObject.schematicType getSchematicObjType() {
+        return schematicType.SHIELD;
+    }
     
 }

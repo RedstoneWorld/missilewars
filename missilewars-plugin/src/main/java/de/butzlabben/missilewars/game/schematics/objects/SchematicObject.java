@@ -46,8 +46,13 @@ public class SchematicObject {
     public ItemStack getItem() {
         return null;
     }
+
+    public SchematicObject.schematicType getSchematicObjType() {
+        return schematicType.NULL;
+    }
     
     public enum schematicType {
+        NULL,
         MISSILE,
         SHIELD
     }
